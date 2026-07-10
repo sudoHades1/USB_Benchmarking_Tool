@@ -11,11 +11,12 @@ sudo apt-get install python3-pip
 
 2. Create a virtual environment
 python3 -m venv .venv (or your preferred virtual environment name)
+source .venv/bin/activate
 
-3. Install the dependencies
+4. Install the dependencies
 pip install -r requirements.txt
 
-4. Run the benchmarking tool
+5. Run the benchmarking tool
 python3 main.py
 
 
