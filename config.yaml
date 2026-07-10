@@ -1,0 +1,185 @@
+application:
+  name: USB Benchmark Station
+  version: 1.3.0
+
+
+output:
+  directory: Results
+
+
+benchmark:
+
+  # KDiskMark uses 5 passes
+  runs: 5
+
+  mode: standard
+
+  test_file_size: 1G
+
+
+  modes:
+
+    quick:
+      runs: 5
+      runtime: 5
+      test_file_size: 512M
+
+    standard:
+      runs: 5
+      runtime: 10
+      test_file_size: 1G
+
+    full:
+      runs: 5
+      runtime: 30
+      test_file_size: 4G
+
+
+  available_runs:
+    - 1
+    - 3
+    - 5
+    - 10
+
+
+  available_test_sizes:
+    - 64M
+    - 128M
+    - 256M
+    - 512M
+    - 1G
+    - 2G
+    - 4G
+
+
+
+  profiles:
+
+    seq1m_q8t1_read:
+      rw: read
+      bs: 1M
+      iodepth: 8
+      numjobs: 1
+
+    seq1m_q8t1_write:
+      rw: write
+      bs: 1M
+      iodepth: 8
+      numjobs: 1
+
+
+    seq1m_q1t1_read:
+      rw: read
+      bs: 1M
+      iodepth: 1
+      numjobs: 1
+
+    seq1m_q1t1_write:
+      rw: write
+      bs: 1M
+      iodepth: 1
+      numjobs: 1
+
+
+    rnd4k_q32t1_read:
+      rw: randread
+      bs: 4K
+      iodepth: 32
+      numjobs: 1
+
+    rnd4k_q32t1_write:
+      rw: randwrite
+      bs: 4K
+      iodepth: 32
+      numjobs: 1
+
+
+    rnd4k_q1t1_read:
+      rw: randread
+      bs: 4K
+      iodepth: 1
+      numjobs: 1
+
+    rnd4k_q1t1_write:
+      rw: randwrite
+      bs: 4K
+      iodepth: 1
+      numjobs: 1
+
+
+  cleanup: true
+
+  required_free_space_gb: 2
+
+
+
+reports:
+
+  html: true
+  csv: true
+  json: true
+  pdf: false
+
+  html_theme: dark
+  title: USB Benchmark Report
+
+
+
+display:
+
+  progress_bar: true
+  refresh_rate_ms: 200
+
+
+
+continuous:
+
+  enabled: true
+  wait_for_next_device: true
+  debounce_seconds: 3
+
+
+
+usb:
+
+  detect_removable_only: true
+  ignore_non_usb_devices: true
+
+
+
+logging:
+
+  enabled: true
+  level: INFO
+  file: usbbench.log
+
+
+
+fio:
+
+  binary: fio
+
+  output_format: json
+
+  temp_filename: usbbench.tmp
+
+
+  runtime: 10
+
+  ramp_time: 5
+
+  direct: 1
+
+  ioengine: libaio
+
+  time_based: 1
+
+  group_reporting: 1
+
+  invalidate_cache: true
+
+  randrepeat: 0
+
+  size: 1G
+
+  end_fsync: 1
