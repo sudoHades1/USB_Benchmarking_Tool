@@ -1,0 +1,4 @@
+pyudev
+pyyaml
+psutil
+jinja2
